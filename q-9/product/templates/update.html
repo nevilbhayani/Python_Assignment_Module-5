@@ -1,0 +1,80 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Management</title>
+    <!-- Include Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Custom CSS styles */
+        body {
+            background-color: #f8f9fa; /* Light gray background */#df9f9f;
+            background-color: #df9f9f;
+
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #ffffff; /* White container background */
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Product Management</h1>
+        <form action="" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="product">Product</label>
+                <select class="form-control" name="product" id="product">
+                    {% for product_name in product %}
+                        {% if edata.product.product_name == product_name.product_name %}
+                            <option value="{{ product_name.product_name }}" selected>{{ product_name.product_name }}</option>
+                        {% else %}
+                            <option value="{{ product_name.product_name }}">{{ product_name.product_name }}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="price">Product Price</label>
+                <input type="text" class="form-control" id="price" name="price" value="{{ edata.product_price }}">
+            </div>
+            <div class="form-group">
+                <label for="img">Image</label>
+                <input type="file" class="form-control-file" id="img" name="img">
+            </div>
+            <div class="form-group">
+                <label for="model">Model</label>
+                <select class="form-control" name="model" id="model">
+                    <option value="i3" {% if edata.product_model == "i3" %} selected {% endif %}>i3</option>
+                    <option value="i5" {% if edata.product_model == "i5" %} selected {% endif %}>i5</option>
+                    <option value="i7" {% if edata.product_model == "i7" %} selected {% endif %}>i7</option>
+                    <option value="i9" {% if edata.product_model == "i9" %} selected {% endif %}>i9</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="ram">RAM</label>
+                <select class="form-control" name="ram" id="ram">
+                    <option value="4gb" {% if edata.product_ram == "4gb" %} selected {% endif %}>4GB</option>
+                    <option value="8gb" {% if edata.product_ram == "8gb" %} selected {% endif %}>8GB</option>
+                    <option value="16gb" {% if edata.product_ram == "16gb" %} selected {% endif %}>16GB</option>
+                    <option value="32gb" {% if edata.product_ram == "32gb" %} selected {% endif %}>32GB</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+    <!-- Include Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
